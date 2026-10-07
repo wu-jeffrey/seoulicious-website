@@ -38,15 +38,14 @@
     :focus-visible{outline:2px solid currentColor;outline-offset:4px}
 
     /* Header */
-    .site-header{position:fixed;inset:0 0 auto;z-index:50;height:var(--header);border-bottom:1px solid rgba(255,255,255,.12);transition:background .2s,border-color .2s}
-    .site-header.scrolled,.site-header.menu-open{background:rgba(10,10,10,.96);backdrop-filter:blur(14px);border-color:rgba(255,255,255,.14)}
+    .site-header{position:fixed;inset:0 0 auto;z-index:50;height:var(--header);background:rgba(10,10,10,.78);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.12);transition:background .2s,border-color .2s}
+    .site-header.scrolled,.site-header.menu-open{background:rgba(10,10,10,.96);border-color:rgba(255,255,255,.14)}
     .header-inner{height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px}
     .nav-left,.nav-right{display:flex;align-items:center;gap:28px}
     .nav-right{justify-content:flex-end}
     .nav-link{color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:700}
     .nav-link:hover{opacity:.65}
-    .logo-link{justify-self:center;display:block;width:212px;overflow:hidden}
-    .logo-link img{width:100%;height:auto;mix-blend-mode:screen}
+    .logo-link{justify-self:center;display:block;width:212px;height:34px;overflow:hidden;background:url('https://bistrobuddy.com/media/com_bistrobuddy/photos/63/145/ee9874f8964ceb30bae920e49e0e37d3_large.jpg') center center/212px 212px no-repeat}
     .header-order{border-color:#fff;color:#000;background:#fff;min-height:38px;padding:0 16px}
     .header-order:hover{background:transparent;color:#fff}
     .menu-button{display:none;border:0;background:none;color:#fff;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:700;padding:12px 0;cursor:pointer}
@@ -95,32 +94,41 @@
     .dish p{grid-column:1/-1;margin:2px 0 0;color:#6e6e69;font-size:13px;max-width:46ch}
     .menu-bottom{margin-top:28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
     .menu-note{color:#777772;font-size:12px}
-    .menu-links{display:flex;gap:10px;align-items:center}
-    .text-link{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;border-bottom:1px solid currentColor;padding-bottom:3px}
 
 
 
-    /* Hospitality / reviews */
-    .hospitality{background:var(--white);padding:0 0 108px}
-    .hospitality-grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);border-top:1px solid var(--ink-line);border-left:1px solid var(--ink-line)}
-    .owner-card{background:var(--black);color:#fff;border-right:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);padding:48px;min-height:610px;display:flex;flex-direction:column;justify-content:space-between}
-    .owner-card .eyebrow{color:#8f8f89}
-    .owner-card h2{margin:22px 0 24px;font-size:clamp(46px,5.4vw,78px);line-height:.93;letter-spacing:-.05em;font-weight:500;max-width:8.5ch}
-    .owner-card p{margin:0;color:#b5b5af;font-size:16px;line-height:1.55;max-width:35ch}
-    .owner-signoff{border-top:1px solid rgba(255,255,255,.2);padding-top:18px;display:flex;justify-content:space-between;gap:24px;font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:#b7b7b1}
-    .owner-signoff strong{color:#fff;font-weight:700}
-    .reviews-card{border-right:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);display:flex;flex-direction:column}
-    .reviews-head{display:grid;grid-template-columns:1fr auto;gap:30px;padding:34px 40px 30px;border-bottom:1px solid var(--ink-line);align-items:end}
-    .reviews-head h3{margin:8px 0 0;font-size:clamp(34px,3.6vw,54px);line-height:.95;letter-spacing:-.04em;font-weight:500}
-    .rating-block{text-align:right;white-space:nowrap}
-    .rating-block strong{display:block;font-size:32px;line-height:1;font-weight:500;letter-spacing:-.04em}
-    .rating-block span{display:block;margin-top:7px;color:#6d6d68;font-size:10px;text-transform:uppercase;letter-spacing:.12em}
-    .review{padding:30px 40px;border-bottom:1px solid var(--ink-line);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;flex:1}
-    .review:last-child{border-bottom:0}
-    .review blockquote{margin:0;font-size:clamp(20px,2.15vw,31px);line-height:1.16;letter-spacing:-.025em;max-width:24ch}
-    .review-meta{text-align:right;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#777772;white-space:nowrap}
-    .review-meta strong{display:block;color:#151515;margin-bottom:5px}
-    .reviews-link{display:inline-block;margin-top:8px;color:#5f5f5b;font-size:10px;text-transform:uppercase;letter-spacing:.12em;border-bottom:1px solid currentColor;padding-bottom:2px}
+    /* Owner / Google reviews */
+    .hospitality{background:#ececea;padding:108px 0}
+    .owner-panel{display:grid;grid-template-columns:minmax(320px,.8fr) minmax(0,1.2fr);border:1px solid var(--ink-line);background:var(--white)}
+    .owner-photo{min-height:560px;background:linear-gradient(145deg,#191919,#3b3b39);position:relative;display:grid;place-items:center;overflow:hidden;border-right:1px solid var(--ink-line);color:#fff}
+    .owner-photo::before,.owner-photo::after{content:"";position:absolute;background:rgba(255,255,255,.09)}
+    .owner-photo::before{width:1px;height:100%;left:50%;top:0}
+    .owner-photo::after{height:1px;width:100%;top:50%;left:0}
+    .owner-photo-mark{position:relative;z-index:1;text-align:center}
+    .owner-photo-mark strong{display:block;font-size:clamp(76px,10vw,150px);line-height:.8;font-weight:400;letter-spacing:-.06em}
+    .owner-photo-mark span{display:block;margin-top:22px;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#aaa}
+    .owner-copy{padding:58px;display:flex;flex-direction:column;justify-content:center}
+    .owner-copy h2{margin:18px 0 26px;font-size:clamp(48px,6vw,84px);line-height:.92;letter-spacing:-.05em;font-weight:500}
+    .owner-copy p{margin:0 0 16px;font-size:18px;line-height:1.55;max-width:46ch;color:#4f4f4b}
+    .owner-copy .owner-name{margin-top:24px;padding-top:18px;border-top:1px solid var(--ink-line);font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:#666}
+    .reviews-section{margin-top:72px}
+    .reviews-header{display:flex;justify-content:space-between;align-items:end;gap:28px;margin-bottom:26px}
+    .reviews-header h2{margin:12px 0 0;font-size:clamp(44px,5.5vw,74px);line-height:.92;letter-spacing:-.05em;font-weight:500}
+    .reviews-summary{text-align:right}
+    .reviews-summary .stars{font-size:20px;letter-spacing:2px;color:#fbbc04}
+    .reviews-summary span{display:block;margin-top:7px;font-size:12px;color:#62625e}
+    .google-reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .google-review{background:#fff;border:1px solid #dadce0;border-radius:10px;padding:22px;min-height:230px;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(60,64,67,.08);transition:box-shadow .18s,transform .18s}
+    .google-review:hover{box-shadow:0 4px 12px rgba(60,64,67,.14);transform:translateY(-1px)}
+    .review-top{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center}
+    .review-avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:15px;font-weight:700}
+    .avatar-blue{background:#4285f4}.avatar-red{background:#db4437}.avatar-green{background:#0f9d58}
+    .reviewer strong{display:block;font-size:14px;font-weight:600;color:#202124}
+    .reviewer span{display:block;margin-top:2px;font-size:11px;color:#70757a}
+    .google-mark{font-size:18px;font-weight:700;color:#4285f4}
+    .review-stars{margin-top:18px;color:#fbbc04;letter-spacing:1px;font-size:15px}
+    .google-review p{margin:12px 0 18px;color:#3c4043;font-size:14px;line-height:1.5}
+    .review-link{margin-top:auto;font-size:12px;color:#1a73e8}
 
     /* Seoul visual */
     .seoul-panel{position:relative;height:min(58vw,680px);min-height:430px;background:#111;overflow:hidden;color:white}
@@ -157,7 +165,7 @@
     /* Footer */
     footer{background:#000;color:#fff;padding:64px 0 34px}
     .footer-top{display:grid;grid-template-columns:1.4fr .6fr .6fr;gap:40px;align-items:start}
-    .footer-logo{width:min(430px,100%);mix-blend-mode:screen}
+    .footer-logo{width:min(430px,100%);height:68px;background:url('https://bistrobuddy.com/media/com_bistrobuddy/photos/63/145/ee9874f8964ceb30bae920e49e0e37d3_large.jpg') center center/430px 430px no-repeat;overflow:hidden}
     .footer-col h4{margin:0 0 16px;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#757575}
     .footer-col a,.footer-col div{display:block;margin:10px 0;font-size:13px;color:#e4e4e1}
     .footer-col a:hover{color:#999}
@@ -189,26 +197,25 @@
       .hero-copy{grid-template-columns:1fr}.hero-side{max-width:520px}.hero h1{max-width:760px}
       .section-title{grid-template-columns:1fr}.section-title p{max-width:56ch}
       .menu-grid{grid-template-columns:repeat(2,1fr)}
-      .hospitality-grid{grid-template-columns:1fr}.owner-card{min-height:500px}
+      .owner-panel{grid-template-columns:1fr 1fr}.owner-photo{min-height:480px}.google-reviews{grid-template-columns:1fr}
       .visit-grid{grid-template-columns:1fr}.visit-map{min-height:450px}.visit-info{min-height:600px}
-      .footer-top{grid-template-columns:1fr 1fr}.footer-logo{grid-column:1/-1;width:360px}
+      .footer-top{grid-template-columns:1fr 1fr}.footer-logo{grid-column:1/-1;width:360px;background-size:360px 360px}
     }
     @media(max-width:680px){
       :root{--header:68px}
       .shell{width:calc(100% - 28px)}
-      .logo-link{width:158px}
+      .logo-link{width:158px;height:28px;background-size:158px 158px}
       .hero{min-height:88svh}.hero-inner{min-height:88svh;padding-bottom:28px}.hero h1{font-size:clamp(48px,15vw,72px)}
       .hero h1 span{font-size:12px;letter-spacing:.14em}.hero-side p{font-size:15px}.hero-actions .button{flex:1}
       .hero-footer{align-items:flex-start;flex-direction:column;gap:8px}
       .facts-grid{grid-template-columns:1fr}.fact{min-height:78px;border-right:0;border-bottom:1px solid rgba(255,255,255,.14);padding:17px 0}.fact+.fact{padding-left:0}.fact:last-child{border-bottom:0}
       section.section{padding:74px 0}.section-title{margin-bottom:30px}.section-title h2{font-size:52px}.section-title p{font-size:14px}
-      .menu-grid{grid-template-columns:1fr}.dish-media{aspect-ratio:16/11}.menu-bottom{align-items:flex-start;flex-direction:column}.menu-links{width:100%;justify-content:space-between}
-      .hospitality{padding-bottom:72px}.owner-card{padding:34px 24px;min-height:460px}.owner-card h2{font-size:52px}.owner-signoff{align-items:flex-start;flex-direction:column;gap:6px}
-      .reviews-head{padding:28px 24px;grid-template-columns:1fr}.rating-block{text-align:left}.review{padding:26px 24px;grid-template-columns:1fr;gap:18px}.review blockquote{font-size:24px}.review-meta{text-align:left}
+      .menu-grid{grid-template-columns:1fr}.dish-media{aspect-ratio:16/11}.menu-bottom{align-items:flex-start;flex-direction:column}
+      .hospitality{padding:72px 0}.owner-panel{grid-template-columns:1fr}.owner-photo{min-height:420px;border-right:0;border-bottom:1px solid var(--ink-line)}.owner-copy{padding:34px 24px}.owner-copy h2{font-size:52px}.owner-copy p{font-size:16px}.reviews-section{margin-top:52px}.reviews-header{align-items:flex-start;flex-direction:column}.reviews-summary{text-align:left}.google-reviews{grid-template-columns:1fr}.google-review{min-height:0}
       .seoul-panel{height:520px;min-height:0}.seoul-panel img{object-position:60% center}.seoul-caption-inner{align-items:flex-start;flex-direction:column;gap:7px}
       .service-grid{grid-template-columns:1fr}.service-card{min-height:300px;padding:30px 24px}.service-card h3{font-size:48px}
       .visit-map{min-height:340px}.visit-info{padding:30px 24px;min-height:0}.visit-info h3{font-size:50px}.hours{font-size:12px;gap:8px 18px}.visit-actions .button{flex:1}
-      .footer-top{grid-template-columns:1fr}.footer-logo{grid-column:auto;width:300px}.footer-bottom{flex-direction:column;gap:8px}
+      .footer-top{grid-template-columns:1fr}.footer-logo{grid-column:auto;width:300px;background-size:300px 300px}.footer-bottom{flex-direction:column;gap:8px}
       .order-options{grid-template-columns:1fr}.modal-card{padding:28px 22px}.modal-card h2{font-size:48px}
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dish-media img,.site-header{transition:none}}
@@ -222,9 +229,7 @@
         <a class="nav-link" href="#visit">Location & hours</a>
       </nav>
 
-      <a class="logo-link" href="#top" aria-label="Seoulicious home">
-        <img src="https://bistrobuddy.com/media/com_bistrobuddy/photos/63/145/ee9874f8964ceb30bae920e49e0e37d3_large.jpg" alt="Seoulicious" />
-      </a>
+      <a class="logo-link" href="#top" aria-label="Seoulicious home"></a>
 
       <div class="nav-right">
         <a class="nav-link" href="https://www.seoulicioustoronto.com/reservations" target="_blank" rel="noopener">Reservations</a>
@@ -245,13 +250,13 @@
   <main id="top">
     <section class="hero">
       <div class="hero-bg" aria-hidden="true">
-        <img src="https://static.wixstatic.com/media/7e3455_5a8f89b16d41496bb80878353affe980~mv2.jpg" alt="" />
+        <img src="https://cdn.corner.inc/ugc/bfc33adf-6f98-433a-b4e7-bc8a7656e3f7-1742153384140-0.jpeg" alt="" />
       </div>
       <div class="shell hero-inner">
         <div class="hero-copy">
-          <h1><span>Korean restaurant · Downtown Toronto</span>Korean food on Yonge.</h1>
+          <h1><span>590 Yonge Street · Downtown Toronto</span>Authentic Korean food.</h1>
           <div class="hero-side">
-            <p>Bibimbap, stews, Korean pancakes, bulgogi and soju at 590 Yonge Street.</p>
+            <p>Bibimbap, stews, Korean pancakes, bulgogi and soju at Yonge &amp; Wellesley.</p>
             <div class="hero-actions">
               <button class="button solid js-order" type="button">Order online</button>
               <a class="button light" href="https://www.seoulicioustoronto.com/reservations" target="_blank" rel="noopener">Reserve a table</a>
@@ -309,55 +314,68 @@
         </div>
 
         <div class="menu-bottom">
-          <div class="menu-note">Served daily · seating may be limited to approximately two hours during peak periods.</div>
-          <div class="menu-links">
-            <a class="button" href="https://www.seoulicioustoronto.com/menus?menu=all-day-menu" target="_blank" rel="noopener">View full menu</a>
-            <a class="text-link" href="https://www.seoulicioustoronto.com/menus?location=590+Yonge+Street&menu=beverages" target="_blank" rel="noopener">Beverages</a>
-          </div>
+          <div class="menu-note">Dine-in prices shown. Delivery platform pricing may differ.</div>
         </div>
       </div>
     </section>
 
 
     <section class="hospitality" id="hospitality">
-      <div class="shell hospitality-grid">
-        <article class="owner-card">
+      <div class="shell owner-panel">
+        <div class="owner-photo" aria-label="Placeholder for a portrait of Harry, owner of Seoulicious">
+          <div class="owner-photo-mark"><strong>H</strong><span>Photo of Harry</span></div>
+        </div>
+        <div class="owner-copy">
+          <div class="eyebrow">Owner</div>
+          <h2>Meet Harry.</h2>
+          <p>Harry owns Seoulicious. Guests regularly mention meeting him during dinner; he is often on the floor checking on tables and talking with regulars.</p>
+          <p>A proper portrait belongs here. Until we have one from the restaurant, this stays a placeholder.</p>
+          <div class="owner-name">Harry · Owner · Seoulicious Toronto</div>
+        </div>
+      </div>
+
+      <div class="shell reviews-section" aria-label="Google reviews">
+        <div class="reviews-header">
           <div>
-            <div class="eyebrow">At Seoulicious</div>
-            <h2>Hospitality is part of the meal.</h2>
-            <p>Guests mention owner Harry by name for a reason. He is present in the room, checks in on tables, and helps make a downtown restaurant feel personal.</p>
+            <div class="eyebrow">Google reviews</div>
+            <h2>4.4 ★</h2>
           </div>
-          <div class="owner-signoff">
-            <strong>Harry · Owner</strong>
-            <span>590 Yonge Street · Toronto</span>
+          <div class="reviews-summary">
+            <div class="stars">★★★★★</div>
+            <span>1,100+ Google reviews</span>
           </div>
-        </article>
-
-        <div class="reviews-card" aria-label="Guest reviews">
-          <div class="reviews-head">
-            <div>
-              <div class="eyebrow">Guest reviews</div>
-              <h3>What people come back for.</h3>
+        </div>
+        <div class="google-reviews">
+          <a class="google-review" href="https://www.google.com/maps/search/?api=1&query=Seoulicious%20590%20Yonge%20Street%20Toronto" target="_blank" rel="noopener">
+            <div class="review-top">
+              <div class="review-avatar avatar-blue">C</div>
+              <div class="reviewer"><strong>Christian Perico</strong><span>Google review</span></div>
+              <div class="google-mark">G</div>
             </div>
-            <div class="rating-block">
-              <strong>4.4 / 5</strong>
-              <span>Google · 1,100+ reviews</span>
-              <a class="reviews-link" href="https://www.google.com/maps/search/?api=1&query=Seoulicious%20590%20Yonge%20Street%20Toronto" target="_blank" rel="noopener">Read reviews ↗</a>
+            <div class="review-stars">★★★★★</div>
+            <p>“Harry the owner … treated us like family.”</p>
+            <span class="review-link">View on Google ↗</span>
+          </a>
+          <a class="google-review" href="https://www.google.com/maps/search/?api=1&query=Seoulicious%20590%20Yonge%20Street%20Toronto" target="_blank" rel="noopener">
+            <div class="review-top">
+              <div class="review-avatar avatar-red">E</div>
+              <div class="reviewer"><strong>ESP Eats</strong><span>Google review</span></div>
+              <div class="google-mark">G</div>
             </div>
-          </div>
-
-          <article class="review">
-            <blockquote>“Harry the owner … treated us like family.”</blockquote>
-            <div class="review-meta"><strong>Christian P.</strong><span>Google review</span></div>
-          </article>
-          <article class="review">
-            <blockquote>“Some of the best bulgogi I’ve had in Toronto.”</blockquote>
-            <div class="review-meta"><strong>ESP Eats</strong><span>Google review</span></div>
-          </article>
-          <article class="review">
-            <blockquote>“Solid lunch deals with great service.”</blockquote>
-            <div class="review-meta"><strong>David G.</strong><span>Google review</span></div>
-          </article>
+            <div class="review-stars">★★★★★</div>
+            <p>“Some of the best bulgogi I’ve had in Toronto.”</p>
+            <span class="review-link">View on Google ↗</span>
+          </a>
+          <a class="google-review" href="https://www.google.com/maps/search/?api=1&query=Seoulicious%20590%20Yonge%20Street%20Toronto" target="_blank" rel="noopener">
+            <div class="review-top">
+              <div class="review-avatar avatar-green">D</div>
+              <div class="reviewer"><strong>David Gou</strong><span>Google review</span></div>
+              <div class="google-mark">G</div>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <p>“Solid lunch deals with great service.”</p>
+            <span class="review-link">View on Google ↗</span>
+          </a>
         </div>
       </div>
     </section>
@@ -446,7 +464,7 @@
   <footer>
     <div class="shell">
       <div class="footer-top">
-        <img class="footer-logo" src="https://bistrobuddy.com/media/com_bistrobuddy/photos/63/145/ee9874f8964ceb30bae920e49e0e37d3_large.jpg" alt="Seoulicious" />
+        <div class="footer-logo" role="img" aria-label="Seoulicious"></div>
         <div class="footer-col">
           <h4>Restaurant</h4>
           <a href="#menu">Menu</a>
