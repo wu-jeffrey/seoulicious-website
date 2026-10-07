@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seoulicious | Korean Restaurant in Downtown Toronto</title>
+  <meta name="description" content="Seoulicious serves Korean comfort food at 590 Yonge Street in downtown Toronto. Dine in, reserve, order pickup or delivery." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    :root{
+      --black:#0a0a0a;
+      --black-2:#111;
+      --white:#f7f7f4;
+      --paper:#ededeb;
+      --grey:#9c9c97;
+      --line:rgba(255,255,255,.16);
+      --ink-line:rgba(10,10,10,.16);
+      --max:1360px;
+      --header:76px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--white);color:var(--black);font-family:Arial,Helvetica,sans-serif;line-height:1.4;-webkit-font-smoothing:antialiased}
+    body.locked{overflow:hidden}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit}
+    button,a{-webkit-tap-highlight-color:transparent}
+    .shell{width:min(var(--max),calc(100% - 56px));margin:0 auto}
+    .eyebrow{font-size:11px;line-height:1;text-transform:uppercase;letter-spacing:.18em;font-weight:700}
+    .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1px solid currentColor;background:transparent;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:700;cursor:pointer;transition:background .18s,color .18s,border-color .18s}
+    .button:hover,.button:focus-visible{background:var(--black);color:white;border-color:var(--black)}
+    .button.light{color:#fff;border-color:rgba(255,255,255,.6)}
+    .button.light:hover,.button.light:focus-visible{background:#fff;color:#000;border-color:#fff}
+    .button.solid{background:#fff;color:#000;border-color:#fff}
+    .button.solid:hover,.button.solid:focus-visible{background:transparent;color:#fff}
+    :focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+    /* Header */
+    .site-header{position:fixed;inset:0 0 auto;z-index:50;height:var(--header);border-bottom:1px solid rgba(255,255,255,.12);transition:background .2s,border-color .2s}
+    .site-header.scrolled,.site-header.menu-open{background:rgba(10,10,10,.96);backdrop-filter:blur(14px);border-color:rgba(255,255,255,.14)}
+    .header-inner{height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px}
+    .nav-left,.nav-right{display:flex;align-items:center;gap:28px}
+    .nav-right{justify-content:flex-end}
+    .nav-link{color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:700}
+    .nav-link:hover{opacity:.65}
+    .logo-link{justify-self:center;display:block;width:212px;overflow:hidden}
+    .logo-link img{width:100%;height:auto;mix-blend-mode:screen}
+    .header-order{border-color:#fff;color:#000;background:#fff;min-height:38px;padding:0 16px}
+    .header-order:hover{background:transparent;color:#fff}
+    .menu-button{display:none;border:0;background:none;color:#fff;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:700;padding:12px 0;cursor:pointer}
+
+    /* Hero */
+    .hero{position:relative;min-height:94svh;background:#121212;color:#fff;overflow:hidden}
+    .hero-bg{position:absolute;inset:0}
+    .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 48%;filter:saturate(.82) contrast(1.04) brightness(.78)}
+    .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,.12) 38%,rgba(0,0,0,.72) 100%)}
+    .hero-inner{position:relative;z-index:2;min-height:94svh;display:grid;align-content:end;padding:calc(var(--header) + 70px) 0 52px}
+    .hero-copy{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:end}
+    .hero h1{margin:0;max-width:900px;font-size:clamp(52px,8vw,116px);line-height:.88;letter-spacing:-.055em;font-weight:500}
+    .hero h1 span{display:block;font-size:.17em;line-height:1.4;letter-spacing:.16em;text-transform:uppercase;font-weight:700;margin-bottom:18px}
+    .hero-side{border-top:1px solid rgba(255,255,255,.52);padding-top:18px}
+    .hero-side p{margin:0 0 24px;color:rgba(255,255,255,.84);font-size:17px;max-width:34ch}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .hero-footer{margin-top:38px;padding-top:18px;border-top:1px solid rgba(255,255,255,.18);display:flex;justify-content:space-between;gap:28px;align-items:center;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.76)}
+    .open-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#73c47c;margin-right:8px;vertical-align:1px}
+    .open-dot.closed{background:#bdbdb8}
+
+    /* Facts strip */
+    .facts{background:#000;color:#fff;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+    .facts-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr}
+    .fact{min-height:96px;padding:21px 26px 20px 0;display:flex;justify-content:space-between;gap:22px;align-items:center;border-right:1px solid rgba(255,255,255,.14)}
+    .fact+ .fact{padding-left:26px}
+    .fact:last-child{border-right:0}
+    .fact strong{font-size:16px;font-weight:600}
+    .fact small{display:block;color:#969696;margin-top:3px;font-size:12px}
+    .fact .arrow{font-size:19px;font-weight:300}
+
+    /* Sections */
+    section.section{padding:108px 0}
+    .section-title{display:grid;grid-template-columns:1fr 440px;gap:40px;align-items:end;margin-bottom:46px}
+    .section-title h2{margin:0;font-size:clamp(46px,6.8vw,92px);line-height:.92;letter-spacing:-.055em;font-weight:500}
+    .section-title p{margin:0;color:#5d5d59;font-size:15px;max-width:42ch}
+
+    /* Menu */
+    .menu-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink-line);border-left:1px solid var(--ink-line)}
+    .dish{border-right:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);background:var(--white)}
+    .dish-media{aspect-ratio:4/3;overflow:hidden;background:#ddd}
+    .dish-media img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+    .dish:hover .dish-media img{transform:scale(1.018)}
+    .dish-body{padding:20px 20px 24px;display:grid;grid-template-columns:1fr auto;gap:10px 24px}
+    .dish h3{margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em}
+    .dish .price{font-size:14px;font-weight:700}
+    .dish p{grid-column:1/-1;margin:2px 0 0;color:#6e6e69;font-size:13px;max-width:46ch}
+    .menu-bottom{margin-top:28px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .menu-note{color:#777772;font-size:12px}
+    .menu-links{display:flex;gap:10px;align-items:center}
+    .text-link{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;border-bottom:1px solid currentColor;padding-bottom:3px}
+
+
+
+    /* Hospitality / reviews */
+    .hospitality{background:var(--white);padding:0 0 108px}
+    .hospitality-grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);border-top:1px solid var(--ink-line);border-left:1px solid var(--ink-line)}
+    .owner-card{background:var(--black);color:#fff;border-right:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);padding:48px;min-height:610px;display:flex;flex-direction:column;justify-content:space-between}
+    .owner-card .eyebrow{color:#8f8f89}
+    .owner-card h2{margin:22px 0 24px;font-size:clamp(46px,5.4vw,78px);line-height:.93;letter-spacing:-.05em;font-weight:500;max-width:8.5ch}
+    .owner-card p{margin:0;color:#b5b5af;font-size:16px;line-height:1.55;max-width:35ch}
+    .owner-signoff{border-top:1px solid rgba(255,255,255,.2);padding-top:18px;display:flex;justify-content:space-between;gap:24px;font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:#b7b7b1}
+    .owner-signoff strong{color:#fff;font-weight:700}
+    .reviews-card{border-right:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);display:flex;flex-direction:column}
+    .reviews-head{display:grid;grid-template-columns:1fr auto;gap:30px;padding:34px 40px 30px;border-bottom:1px solid var(--ink-line);align-items:end}
+    .reviews-head h3{margin:8px 0 0;font-size:clamp(34px,3.6vw,54px);line-height:.95;letter-spacing:-.04em;font-weight:500}
+    .rating-block{text-align:right;white-space:nowrap}
+    .rating-block strong{display:block;font-size:32px;line-height:1;font-weight:500;letter-spacing:-.04em}
+    .rating-block span{display:block;margin-top:7px;color:#6d6d68;font-size:10px;text-transform:uppercase;letter-spacing:.12em}
+    .review{padding:30px 40px;border-bottom:1px solid var(--ink-line);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;flex:1}
+    .review:last-child{border-bottom:0}
+    .review blockquote{margin:0;font-size:clamp(20px,2.15vw,31px);line-height:1.16;letter-spacing:-.025em;max-width:24ch}
+    .review-meta{text-align:right;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#777772;white-space:nowrap}
+    .review-meta strong{display:block;color:#151515;margin-bottom:5px}
+    .reviews-link{display:inline-block;margin-top:8px;color:#5f5f5b;font-size:10px;text-transform:uppercase;letter-spacing:.12em;border-bottom:1px solid currentColor;padding-bottom:2px}
+
+    /* Seoul visual */
+    .seoul-panel{position:relative;height:min(58vw,680px);min-height:430px;background:#111;overflow:hidden;color:white}
+    .seoul-panel img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08)}
+    .seoul-panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.26))}
+    .seoul-caption{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:26px 0}
+    .seoul-caption-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;border-top:1px solid rgba(255,255,255,.45);padding-top:16px}
+    .seoul-caption strong{font-size:11px;text-transform:uppercase;letter-spacing:.16em}
+    .seoul-caption span{font-size:11px;color:rgba(255,255,255,.72);text-transform:uppercase;letter-spacing:.11em}
+
+    /* Dining / ordering */
+    .service{background:var(--black);color:#fff}
+    .service .section-title p{color:#a8a8a3}
+    .service-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .service-card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:42px;min-height:340px;display:flex;flex-direction:column;justify-content:space-between}
+    .service-card .number{font-size:11px;letter-spacing:.14em;color:#868681}
+    .service-card h3{font-size:clamp(38px,4.5vw,66px);line-height:.95;letter-spacing:-.045em;font-weight:500;margin:24px 0 12px}
+    .service-card p{margin:0;color:#aaa9a4;max-width:42ch;font-size:14px}
+    .service-card .button{align-self:flex-start;margin-top:34px}
+
+    /* Visit */
+    .visit{background:#e7e7e3}
+    .visit-grid{display:grid;grid-template-columns:1.05fr .95fr;border-top:1px solid var(--ink-line);border-left:1px solid var(--ink-line)}
+    .visit-map{min-height:650px;border-right:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);background:#d2d2cd}
+    .visit-map iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(1) contrast(.94)}
+    .visit-info{border-right:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);padding:42px;display:flex;flex-direction:column;justify-content:space-between}
+    .visit-info h3{margin:18px 0 8px;font-size:clamp(42px,5.3vw,72px);line-height:.94;letter-spacing:-.05em;font-weight:500}
+    .address{font-size:18px;line-height:1.45;margin-bottom:34px}
+    .today-status{font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin:0 0 32px}
+    .hours{border-top:1px solid var(--ink-line);padding-top:18px;display:grid;grid-template-columns:1fr auto;gap:10px 30px;font-size:13px}
+    .hours strong{font-weight:600}
+    .visit-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:38px}
+
+    /* Footer */
+    footer{background:#000;color:#fff;padding:64px 0 34px}
+    .footer-top{display:grid;grid-template-columns:1.4fr .6fr .6fr;gap:40px;align-items:start}
+    .footer-logo{width:min(430px,100%);mix-blend-mode:screen}
+    .footer-col h4{margin:0 0 16px;font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#757575}
+    .footer-col a,.footer-col div{display:block;margin:10px 0;font-size:13px;color:#e4e4e1}
+    .footer-col a:hover{color:#999}
+    .footer-bottom{margin-top:54px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;gap:30px;color:#686868;font-size:10px;text-transform:uppercase;letter-spacing:.12em}
+
+    /* Order modal */
+    .modal{position:fixed;z-index:100;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:22px;backdrop-filter:blur(7px)}
+    .modal.open{display:flex}
+    .modal-card{width:min(640px,100%);background:#f1f1ee;color:#0a0a0a;border:1px solid #30302e;padding:34px;position:relative}
+    .modal-close{position:absolute;top:22px;right:22px;width:38px;height:38px;border:1px solid #bbb;background:transparent;cursor:pointer;font-size:19px}
+    .modal-card h2{margin:36px 0 8px;font-size:clamp(42px,7vw,72px);line-height:.92;letter-spacing:-.05em;font-weight:500}
+    .modal-card>p{margin:0 0 28px;color:#6c6c67}
+    .order-options{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #bdbdb8;border-left:1px solid #bdbdb8}
+    .order-option{padding:20px;border-right:1px solid #bdbdb8;border-bottom:1px solid #bdbdb8;min-height:116px;display:flex;flex-direction:column;justify-content:space-between;transition:background .16s}
+    .order-option:hover{background:#e2e2de}
+    .order-option span{font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:#777}
+    .order-option strong{font-size:17px;font-weight:600}
+
+    /* Mobile navigation */
+    .mobile-nav{position:fixed;z-index:45;inset:var(--header) 0 0;background:#090909;color:white;display:none;padding:34px 28px}
+    .mobile-nav.open{display:block}
+    .mobile-nav a,.mobile-nav button{width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;border-bottom:1px solid rgba(255,255,255,.14);padding:18px 0;color:#fff;font-size:28px;font-weight:500;letter-spacing:-.03em;text-align:left;cursor:pointer}
+    .mobile-nav small{display:block;margin-top:26px;color:#777;font-size:11px;line-height:1.7;text-transform:uppercase;letter-spacing:.12em}
+
+    @media(max-width:980px){
+      .shell{width:min(var(--max),calc(100% - 36px))}
+      .header-inner{grid-template-columns:1fr auto}
+      .nav-left{display:none}.logo-link{justify-self:start;width:190px}.nav-right .nav-link,.nav-right .header-order{display:none}.menu-button{display:block}
+      .hero-copy{grid-template-columns:1fr}.hero-side{max-width:520px}.hero h1{max-width:760px}
+      .section-title{grid-template-columns:1fr}.section-title p{max-width:56ch}
+      .menu-grid{grid-template-columns:repeat(2,1fr)}
+      .hospitality-grid{grid-template-columns:1fr}.owner-card{min-height:500px}
+      .visit-grid{grid-template-columns:1fr}.visit-map{min-height:450px}.visit-info{min-height:600px}
+      .footer-top{grid-template-columns:1fr 1fr}.footer-logo{grid-column:1/-1;width:360px}
+    }
+    @media(max-width:680px){
+      :root{--header:68px}
+      .shell{width:calc(100% - 28px)}
+      .logo-link{width:158px}
+      .hero{min-height:88svh}.hero-inner{min-height:88svh;padding-bottom:28px}.hero h1{font-size:clamp(48px,15vw,72px)}
+      .hero h1 span{font-size:12px;letter-spacing:.14em}.hero-side p{font-size:15px}.hero-actions .button{flex:1}
+      .hero-footer{align-items:flex-start;flex-direction:column;gap:8px}
+      .facts-grid{grid-template-columns:1fr}.fact{min-height:78px;border-right:0;border-bottom:1px solid rgba(255,255,255,.14);padding:17px 0}.fact+.fact{padding-left:0}.fact:last-child{border-bottom:0}
+      section.section{padding:74px 0}.section-title{margin-bottom:30px}.section-title h2{font-size:52px}.section-title p{font-size:14px}
+      .menu-grid{grid-template-columns:1fr}.dish-media{aspect-ratio:16/11}.menu-bottom{align-items:flex-start;flex-direction:column}.menu-links{width:100%;justify-content:space-between}
+      .hospitality{padding-bottom:72px}.owner-card{padding:34px 24px;min-height:460px}.owner-card h2{font-size:52px}.owner-signoff{align-items:flex-start;flex-direction:column;gap:6px}
+      .reviews-head{padding:28px 24px;grid-template-columns:1fr}.rating-block{text-align:left}.review{padding:26px 24px;grid-template-columns:1fr;gap:18px}.review blockquote{font-size:24px}.review-meta{text-align:left}
+      .seoul-panel{height:520px;min-height:0}.seoul-panel img{object-position:60% center}.seoul-caption-inner{align-items:flex-start;flex-direction:column;gap:7px}
+      .service-grid{grid-template-columns:1fr}.service-card{min-height:300px;padding:30px 24px}.service-card h3{font-size:48px}
+      .visit-map{min-height:340px}.visit-info{padding:30px 24px;min-height:0}.visit-info h3{font-size:50px}.hours{font-size:12px;gap:8px 18px}.visit-actions .button{flex:1}
+      .footer-top{grid-template-columns:1fr}.footer-logo{grid-column:auto;width:300px}.footer-bottom{flex-direction:column;gap:8px}
+      .order-options{grid-template-columns:1fr}.modal-card{padding:28px 22px}.modal-card h2{font-size:48px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dish-media img,.site-header{transition:none}}
+  </style>
+</head>
+<body>
+  <header class="site-header" id="siteHeader">
+    <div class="shell header-inner">
+      <nav class="nav-left" aria-label="Primary">
+        <a class="nav-link" href="#menu">Menu</a>
+        <a class="nav-link" href="#visit">Location & hours</a>
+      </nav>
+
+      <a class="logo-link" href="#top" aria-label="Seoulicious home">
+        <img src="https://bistrobuddy.com/media/com_bistrobuddy/photos/63/145/ee9874f8964ceb30bae920e49e0e37d3_large.jpg" alt="Seoulicious" />
+      </a>
+
+      <div class="nav-right">
+        <a class="nav-link" href="https://www.seoulicioustoronto.com/reservations" target="_blank" rel="noopener">Reservations</a>
+        <button class="button header-order js-order" type="button">Order online</button>
+        <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileNav">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <a href="#menu"><span>Menu</span><span>01</span></a>
+    <a href="https://www.seoulicioustoronto.com/reservations" target="_blank" rel="noopener"><span>Reservations</span><span>02</span></a>
+    <button class="js-order" type="button"><span>Order online</span><span>03</span></button>
+    <a href="#visit"><span>Location & hours</span><span>04</span></a>
+    <small>590 Yonge Street, Toronto<br>647 347 5650</small>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="https://static.wixstatic.com/media/7e3455_5a8f89b16d41496bb80878353affe980~mv2.jpg" alt="" />
+      </div>
+      <div class="shell hero-inner">
+        <div class="hero-copy">
+          <h1><span>Korean restaurant · Downtown Toronto</span>Korean food on Yonge.</h1>
+          <div class="hero-side">
+            <p>Bibimbap, stews, Korean pancakes, bulgogi and soju at 590 Yonge Street.</p>
+            <div class="hero-actions">
+              <button class="button solid js-order" type="button">Order online</button>
+              <a class="button light" href="https://www.seoulicioustoronto.com/reservations" target="_blank" rel="noopener">Reserve a table</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-footer">
+          <div><span class="open-dot" id="openDot"></span><span id="heroStatus">Checking hours</span></div>
+          <div>Open until 2AM Friday & Saturday</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="facts">
+      <div class="shell facts-grid">
+        <a class="fact" href="#visit">
+          <div><strong>590 Yonge Street</strong><small>Toronto, ON M4Y 1Z3</small></div><span class="arrow">↘</span>
+        </a>
+        <a class="fact" href="tel:+16473475650">
+          <div><strong>647 347 5650</strong><small>Call the restaurant</small></div><span class="arrow">↗</span>
+        </a>
+        <a class="fact" href="https://www.instagram.com/seoulicious_toronto/" target="_blank" rel="noopener">
+          <div><strong>@seoulicious_toronto</strong><small>Instagram</small></div><span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <section class="section" id="menu">
+      <div class="shell">
+        <div class="section-title">
+          <div>
+            <div class="eyebrow">Menu</div>
+            <h2>House favourites.</h2>
+          </div>
+          <p>All-day Korean comfort food. Dine-in prices shown below; delivery platform pricing may differ.</p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="dish">
+            <div class="dish-media"><img loading="lazy" src="https://static.wixstatic.com/media/7e3455_cd22fb8634d543c8837c880fd31c19e4~mv2.jpg" alt="Hot Stone Bibimbap" /></div>
+            <div class="dish-body"><h3>Hot Stone Bibimbap</h3><span class="price">$15</span><p>Rice, seasoned vegetables and fried egg served in a hot stone bowl.</p></div>
+          </article>
+          <article class="dish">
+            <div class="dish-media"><img loading="lazy" src="https://static.wixstatic.com/media/7e3455_e305b15f53b8404ca8e80b228745f122~mv2.jpg" alt="Pork Bone Soup" /></div>
+            <div class="dish-body"><h3>Pork Bone Soup</h3><span class="price">$17</span><p>Spicy pork bone stew with vegetables. Rice included.</p></div>
+          </article>
+          <article class="dish">
+            <div class="dish-media"><img loading="lazy" src="https://static.wixstatic.com/media/7e3455_664b1c254db24e01bc5ee619b14ba308~mv2.jpg" alt="Bulgogi" /></div>
+            <div class="dish-body"><h3>Bulgogi</h3><span class="price">$22</span><p>Thin-sliced sirloin beef marinated in sweet soy sauce. Rice included.</p></div>
+          </article>
+          <article class="dish">
+            <div class="dish-media"><img loading="lazy" src="https://static.wixstatic.com/media/7e3455_c8dcb89df30f461281f86626e6ae193e~mv2.jpg" alt="Rose Tteokbokki" /></div>
+            <div class="dish-body"><h3>Rose Tteokbokki</h3><span class="price">$19</span><p>Rice cakes in rose cream sauce with sausage, bacon, noodles and cheese.</p></div>
+          </article>
+        </div>
+
+        <div class="menu-bottom">
+          <div class="menu-note">Served daily · seating may be limited to approximately two hours during peak periods.</div>
+          <div class="menu-links">
+            <a class="button" href="https://www.seoulicioustoronto.com/menus?menu=all-day-menu" target="_blank" rel="noopener">View full menu</a>
+            <a class="text-link" href="https://www.seoulicioustoronto.com/menus?location=590+Yonge+Street&menu=beverages" target="_blank" rel="noopener">Beverages</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="hospitality" id="hospitality">
+      <div class="shell hospitality-grid">
+        <article class="owner-card">
+          <div>
+            <div class="eyebrow">At Seoulicious</div>
+            <h2>Hospitality is part of the meal.</h2>
+            <p>Guests mention owner Harry by name for a reason. He is present in the room, checks in on tables, and helps make a downtown restaurant feel personal.</p>
+          </div>
+          <div class="owner-signoff">
+            <strong>Harry · Owner</strong>
+            <span>590 Yonge Street · Toronto</span>
+          </div>
+        </article>
+
+        <div class="reviews-card" aria-label="Guest reviews">
+          <div class="reviews-head">
+            <div>
+              <div class="eyebrow">Guest reviews</div>
+              <h3>What people come back for.</h3>
+            </div>
+            <div class="rating-block">
+              <strong>4.4 / 5</strong>
+              <span>Google · 1,100+ reviews</span>
+              <a class="reviews-link" href="https://www.google.com/maps/search/?api=1&query=Seoulicious%20590%20Yonge%20Street%20Toronto" target="_blank" rel="noopener">Read reviews ↗</a>
+            </div>
+          </div>
+
+          <article class="review">
+            <blockquote>“Harry the owner … treated us like family.”</blockquote>
+            <div class="review-meta"><strong>Christian P.</strong><span>Google review</span></div>
+          </article>
+          <article class="review">
+            <blockquote>“Some of the best bulgogi I’ve had in Toronto.”</blockquote>
+            <div class="review-meta"><strong>ESP Eats</strong><span>Google review</span></div>
+          </article>
+          <article class="review">
+            <blockquote>“Solid lunch deals with great service.”</blockquote>
+            <div class="review-meta"><strong>David G.</strong><span>Google review</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seoul-panel" aria-label="Black and white Seoul skyline">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Downtown_Seoul_skyline.jpg/1600px-Downtown_Seoul_skyline.jpg" alt="Black and white skyline of Seoul with N Seoul Tower, the Han River and city high-rises" />
+      <div class="seoul-caption">
+        <div class="shell seoul-caption-inner">
+          <strong>Seoul, South Korea</strong>
+          <span>Seoulicious · Toronto</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section service">
+      <div class="shell">
+        <div class="section-title">
+          <div>
+            <div class="eyebrow">Dine in / take out</div>
+            <h2>Dine in. Take out.</h2>
+          </div>
+          <p>Reserve a table for dine-in, order ahead for pickup, or choose a delivery service.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div>
+              <div class="number">01 / DINE IN</div>
+              <h3>Reserve a table.</h3>
+              <p>Seoulicious is on Yonge Street just south of Wellesley.</p>
+            </div>
+            <a class="button light" href="https://www.seoulicioustoronto.com/reservations" target="_blank" rel="noopener">Reservations</a>
+          </article>
+          <article class="service-card">
+            <div>
+              <div class="number">02 / TAKE OUT</div>
+              <h3>Order ahead.</h3>
+              <p>Pickup from the restaurant or delivery through your preferred service.</p>
+            </div>
+            <button class="button light js-order" type="button">Order online</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section visit" id="visit">
+      <div class="shell">
+        <div class="section-title">
+          <div>
+            <div class="eyebrow">Visit</div>
+            <h2>Yonge & Wellesley.</h2>
+          </div>
+          <p>590 Yonge Street, Toronto. A short walk south from Wellesley Station.</p>
+        </div>
+
+        <div class="visit-grid">
+          <div class="visit-map">
+            <iframe title="Map to Seoulicious at 590 Yonge Street" loading="lazy" src="https://www.google.com/maps?q=590%20Yonge%20St%2C%20Toronto%2C%20ON%20M4Y%201Z3&output=embed"></iframe>
+          </div>
+          <div class="visit-info">
+            <div>
+              <div class="eyebrow">Seoulicious</div>
+              <h3>590 Yonge Street.</h3>
+              <div class="address">Toronto, Ontario<br>M4Y 1Z3</div>
+              <div class="today-status" id="visitStatus">Checking today's hours</div>
+              <div class="hours" aria-label="Opening hours">
+                <strong>Monday</strong><span>11:30AM – 10PM</span>
+                <strong>Tuesday</strong><span>11:30AM – 10PM</span>
+                <strong>Wednesday</strong><span>11:30AM – 10PM</span>
+                <strong>Thursday</strong><span>11:30AM – 10PM</span>
+                <strong>Friday</strong><span>11:30AM – 2AM</span>
+                <strong>Saturday</strong><span>11:30AM – 2AM</span>
+                <strong>Sunday</strong><span>11:30AM – 10PM</span>
+              </div>
+            </div>
+            <div class="visit-actions">
+              <a class="button" href="https://www.google.com/maps/dir/?api=1&destination=590%20Yonge%20St%2C%20Toronto%2C%20ON%20M4Y%201Z3" target="_blank" rel="noopener">Get directions</a>
+              <a class="button" href="tel:+16473475650">647 347 5650</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <div class="footer-top">
+        <img class="footer-logo" src="https://bistrobuddy.com/media/com_bistrobuddy/photos/63/145/ee9874f8964ceb30bae920e49e0e37d3_large.jpg" alt="Seoulicious" />
+        <div class="footer-col">
+          <h4>Restaurant</h4>
+          <a href="#menu">Menu</a>
+          <a href="https://www.seoulicioustoronto.com/reservations" target="_blank" rel="noopener">Reservations</a>
+          <a href="#visit">Location & hours</a>
+          <a href="https://www.instagram.com/seoulicious_toronto/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="tel:+16473475650">647 347 5650</a>
+          <div>590 Yonge Street<br>Toronto, ON M4Y 1Z3</div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> Seoulicious</span><span>Korean restaurant · Toronto</span></div>
+    </div>
+  </footer>
+
+  <div class="modal" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="orderTitle" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close order options">×</button>
+      <div class="eyebrow">Order Seoulicious</div>
+      <h2 id="orderTitle">Pickup or delivery.</h2>
+      <p>Choose how you want to order.</p>
+      <div class="order-options">
+        <a class="order-option" href="https://ritual.co/order/seoulicious-yonge-wellesley-toronto/8cf7" target="_blank" rel="noopener"><span>Pickup</span><strong>Ritual ↗</strong></a>
+        <a class="order-option" href="https://www.ubereats.com/ca/store/seoulicious/2P3obFfKVdWoBYx_ct8Lwg" target="_blank" rel="noopener"><span>Delivery</span><strong>Uber Eats ↗</strong></a>
+        <a class="order-option" href="https://order.online/business/seoulicious-326827" target="_blank" rel="noopener"><span>Delivery</span><strong>DoorDash ↗</strong></a>
+        <a class="order-option" href="https://www.skipthedishes.com/seoulicious-590" target="_blank" rel="noopener"><span>Delivery</span><strong>Skip ↗</strong></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const header = document.getElementById('siteHeader');
+    const menuButton = document.getElementById('menuButton');
+    const mobileNav = document.getElementById('mobileNav');
+    const orderModal = document.getElementById('orderModal');
+    const modalClose = document.getElementById('modalClose');
+
+    function updateHeader(){
+      header.classList.toggle('scrolled', window.scrollY > 24);
+    }
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, {passive:true});
+
+    function closeMobileNav(){
+      mobileNav.classList.remove('open');
+      mobileNav.setAttribute('aria-hidden','true');
+      menuButton.setAttribute('aria-expanded','false');
+      header.classList.remove('menu-open');
+      if(!orderModal.classList.contains('open')) document.body.classList.remove('locked');
+    }
+
+    menuButton.addEventListener('click',()=>{
+      const isOpen = mobileNav.classList.toggle('open');
+      mobileNav.setAttribute('aria-hidden',String(!isOpen));
+      menuButton.setAttribute('aria-expanded',String(isOpen));
+      header.classList.toggle('menu-open',isOpen);
+      document.body.classList.toggle('locked',isOpen);
+    });
+    mobileNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMobileNav));
+
+    function openOrder(){
+      closeMobileNav();
+      orderModal.classList.add('open');
+      orderModal.setAttribute('aria-hidden','false');
+      document.body.classList.add('locked');
+      modalClose.focus();
+    }
+    function closeOrder(){
+      orderModal.classList.remove('open');
+      orderModal.setAttribute('aria-hidden','true');
+      document.body.classList.remove('locked');
+    }
+    document.querySelectorAll('.js-order').forEach(button=>button.addEventListener('click',openOrder));
+    modalClose.addEventListener('click',closeOrder);
+    orderModal.addEventListener('click',event=>{if(event.target===orderModal) closeOrder();});
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'){
+        if(orderModal.classList.contains('open')) closeOrder();
+        else if(mobileNav.classList.contains('open')) closeMobileNav();
+      }
+    });
+
+    function torontoNow(){
+      const parts = new Intl.DateTimeFormat('en-CA',{
+        timeZone:'America/Toronto', weekday:'short', hour:'2-digit', minute:'2-digit', hourCycle:'h23'
+      }).formatToParts(new Date());
+      return Object.fromEntries(parts.map(part=>[part.type,part.value]));
+    }
+
+    function getRestaurantStatus(){
+      const p = torontoNow();
+      const day = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[p.weekday];
+      const minutes = Number(p.hour)*60 + Number(p.minute);
+      const opens = 11*60 + 30;
+      const earlyLateNight = (day===6 || day===0) && minutes < 120; // Fri/Sat service continuing past midnight
+
+      if(earlyLateNight) return {open:true,label:'Open now · until 2AM'};
+      if(day===5 || day===6){
+        if(minutes>=opens) return {open:true,label:'Open now · until 2AM'};
+        return {open:false,label:'Closed now · opens 11:30AM'};
+      }
+      if(minutes>=opens && minutes<22*60) return {open:true,label:'Open now · until 10PM'};
+      return {open:false,label:minutes<opens?'Closed now · opens 11:30AM':'Closed now'};
+    }
+
+    const status = getRestaurantStatus();
+    const heroStatus = document.getElementById('heroStatus');
+    const visitStatus = document.getElementById('visitStatus');
+    const openDot = document.getElementById('openDot');
+    heroStatus.textContent = status.label;
+    visitStatus.textContent = status.label;
+    if(!status.open) openDot.classList.add('closed');
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
